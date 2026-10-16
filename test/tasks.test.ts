@@ -115,13 +115,17 @@ describe('tasks', () => {
     expect(res.statusCode).toBe(200);
     expect((await columnTitles()).todo).toEqual(['B', 'C', 'A']);
     res = await api.post(`${base()}/${a.id}/move`, { status: 'todo', index: 1 });
+    expect(res.statusCode).toBe(200);
     expect((await columnTitles()).todo).toEqual(['B', 'A', 'C']);
     res = await api.post(`${base()}/${a.id}/move`, { status: 'todo', index: 0 });
+    expect(res.statusCode).toBe(200);
     expect((await columnTitles()).todo).toEqual(['A', 'B', 'C']);
     // clamped
     res = await api.post(`${base()}/${a.id}/move`, { status: 'todo', index: 99 });
+    expect(res.statusCode).toBe(200);
     expect((await columnTitles()).todo).toEqual(['B', 'C', 'A']);
     res = await api.post(`${base()}/${a.id}/move`, { status: 'todo', index: -5 });
+    expect(res.statusCode).toBe(200);
     expect((await columnTitles()).todo).toEqual(['A', 'B', 'C']);
   });
 
