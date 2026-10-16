@@ -22,6 +22,9 @@ pnpm redis        # docker compose up -d redis
 pnpm dev          # tsx watch, port 4000
 pnpm test         # vitest (uses Redis DB 15, flushed per test file)
 pnpm typecheck
+pnpm lint         # eslint (lint:fix to autofix)
+pnpm format       # prettier --write (format:check in CI)
+pnpm check        # lint + format:check + typecheck + test (pre-push hook)
 pnpm build && pnpm start
 ```
 
@@ -44,6 +47,8 @@ test/              # vitest, one file per route group
 ```
 
 ## Conventions
+
+- Git hooks (Husky): pre-commit runs lint-staged (eslint --fix + prettier on staged files), pre-push runs `pnpm check`.
 
 - Validate every body and query with zod. Validation failures return `400 { error: { code: "VALIDATION_ERROR", message } }`.
 - Throw `AppError(status, code, message)` from `lib/errors.ts`, and let the central error handler shape the response.
