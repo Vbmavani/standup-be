@@ -40,9 +40,9 @@ Run one test file with `pnpm vitest run test/tasks.test.ts`, or one test with `-
 
 Before you say a task is finished:
 
-1. `pnpm check` passes. The pre-push hook runs the same command, so a failing check blocks the push.
-2. New behaviour has a test in `test/<area>.test.ts`.
-3. If the API changed, `docs/PLAN.md` is updated in **both** repos.
+1. `pnpm lint`, `pnpm typecheck` and `pnpm test` pass. `pnpm check` runs all three plus `format:check`, and the pre-push hook runs it too.
+2. API changes are reflected in `docs/PLAN.md` in **both** repos.
+3. New endpoints have a test in `test/` (`test/<area>.test.ts`).
 
 ## Where things live
 
@@ -100,8 +100,10 @@ docs/PLAN.md         product spec, Redis data model, full API contract
 - Return or log `passwordHash`, session tokens or cookies.
 - Invent a new Redis key prefix without adding it to `lib/keys.ts` and the data model table in `docs/PLAN.md`.
 - Use `WATCH` on the shared Redis connection. It isn't safe across concurrent requests; use a Lua script instead.
-- Edit `pnpm-lock.yaml` by hand, commit `.env`, or touch `dist/`.
-- Point tests at Redis DB 0. Tests use DB 15 and flush it.
+- Edit `.env` files or `pnpm-lock.yaml` by hand, or touch `dist/`.
+- Commit with `--no-verify`. Fix whatever the hook reports instead.
+- Flush Redis DB 0, which holds local dev data. Tests use DB 15, and only tests flush it.
+- Push to `main`. Push a branch and open a PR.
 
 ## Gotchas
 
@@ -114,6 +116,6 @@ docs/PLAN.md         product spec, Redis data model, full API contract
 
 ## Git
 
-- Work on a branch (currently `agent-playground`). Use conventional commit messages: `feat:`, `fix:`, `chore:`, `docs:`, `test:`, `style:`.
+- Work on a branch (currently `agent-playground`) and open a PR into `main`. Never push to `main` directly. Use conventional commit messages: `feat:`, `fix:`, `chore:`, `docs:`, `test:`, `style:`.
 - Husky hooks: **pre-commit** runs lint-staged (eslint --fix + prettier on staged files), **pre-push** runs `pnpm check`.
 - Personal, uncommitted notes go in `CLAUDE.local.md`, which is gitignored.
