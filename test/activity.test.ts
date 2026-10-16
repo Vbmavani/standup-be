@@ -23,7 +23,12 @@ describe('activity', () => {
 
     const res = await as(app, bob.cookie).get(`/api/teams/${team.id}/activity`);
     expect(res.statusCode).toBe(200);
-    const items = res.json().items as { type: string; actorName: string; actorId: string; data: Record<string, unknown> }[];
+    const items = res.json().items as {
+      type: string;
+      actorName: string;
+      actorId: string;
+      data: Record<string, unknown>;
+    }[];
     expect(items.map((i) => i.type)).toEqual([
       'team.renamed',
       'standup.submitted',

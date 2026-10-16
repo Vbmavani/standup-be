@@ -12,10 +12,19 @@ afterAll(async () => {
 
 describe('auth', () => {
   it('signs up, sets an httpOnly sid cookie and never returns the password hash', async () => {
-    const res = await as(app).post('/api/auth/signup', { name: 'Ada', email: 'Ada@Example.com', password: 'password123' });
+    const res = await as(app).post('/api/auth/signup', {
+      name: 'Ada',
+      email: 'Ada@Example.com',
+      password: 'password123',
+    });
     expect(res.statusCode).toBe(201);
     const { user } = res.json();
-    expect(user).toEqual({ id: expect.any(String), name: 'Ada', email: 'ada@example.com', createdAt: expect.any(String) });
+    expect(user).toEqual({
+      id: expect.any(String),
+      name: 'Ada',
+      email: 'ada@example.com',
+      createdAt: expect.any(String),
+    });
     expect(user.passwordHash).toBeUndefined();
     const sid = res.cookies.find((c) => c.name === 'sid');
     expect(sid?.value).toMatch(/^[0-9a-f]{64}$/);
@@ -28,7 +37,11 @@ describe('auth', () => {
 
   it('rejects a duplicate email with 409', async () => {
     await signup(app, { email: 'dup@example.com' });
-    const res = await as(app).post('/api/auth/signup', { name: 'X', email: 'DUP@example.com', password: 'password123' });
+    const res = await as(app).post('/api/auth/signup', {
+      name: 'X',
+      email: 'DUP@example.com',
+      password: 'password123',
+    });
     expect(res.statusCode).toBe(409);
     expect(res.json().error.code).toBe('CONFLICT');
   });

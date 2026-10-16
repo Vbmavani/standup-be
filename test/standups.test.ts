@@ -42,7 +42,12 @@ describe('standups', () => {
       updatedAt: expect.any(String),
     });
 
-    const edit = await as(app, owner.cookie).put(`${url}/me`, { date: '2026-10-15', yesterday: '', today: 'Edited', blockers: 'CI' });
+    const edit = await as(app, owner.cookie).put(`${url}/me`, {
+      date: '2026-10-15',
+      yesterday: '',
+      today: 'Edited',
+      blockers: 'CI',
+    });
     expect(edit.statusCode).toBe(200);
 
     const res = await as(app, bob.cookie).get(`${url}?date=2026-10-15`);
@@ -50,7 +55,12 @@ describe('standups', () => {
     const body = res.json();
     expect(body.date).toBe('2026-10-15');
     expect(body.entries).toHaveLength(1);
-    expect(body.entries[0]).toMatchObject({ userId: owner.user.id, userName: 'Alice', today: 'Edited', blockers: 'CI' });
+    expect(body.entries[0]).toMatchObject({
+      userId: owner.user.id,
+      userName: 'Alice',
+      today: 'Edited',
+      blockers: 'CI',
+    });
     expect(body.missing).toEqual([{ id: bob.user.id, name: 'Bob', email: bob.user.email, isOwner: false }]);
 
     const other = await as(app, bob.cookie).get(`${url}?date=2026-10-14`);

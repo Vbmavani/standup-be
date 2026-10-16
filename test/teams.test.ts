@@ -142,7 +142,9 @@ describe('teams', () => {
     expect((await as(app, owner.cookie).get(`/api/teams/${team.id}`)).statusCode).toBe(404);
     expect((await as(app, owner.cookie).get('/api/teams')).json().teams).toEqual([]);
 
-    const leftovers = (await app.redis.keys('*')).filter((k) => k.includes(team.id) || k.startsWith('task:') || k.startsWith('invite:'));
+    const leftovers = (await app.redis.keys('*')).filter(
+      (k) => k.includes(team.id) || k.startsWith('task:') || k.startsWith('invite:'),
+    );
     expect(leftovers).toEqual([]);
   });
 

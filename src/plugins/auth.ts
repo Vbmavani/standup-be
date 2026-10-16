@@ -55,4 +55,3 @@ export function memberTeam(request: FastifyRequest): TeamHash {
   if (!request.team) throw notFound('Team not found');
   return request.team;
 }
-

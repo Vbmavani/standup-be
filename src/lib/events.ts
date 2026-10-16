@@ -9,12 +9,7 @@ export type ActivityInput = { type: ActivityType; actorId: string; data: Record<
  * Append to the team's capped activity stream (if given) and publish each
  * event type to the team's pub/sub channel.
  */
-export async function emit(
-  redis: Redis,
-  teamId: string,
-  events: EventType[],
-  activity?: ActivityInput,
-): Promise<void> {
+export async function emit(redis: Redis, teamId: string, events: EventType[], activity?: ActivityInput): Promise<void> {
   const pipe = redis.pipeline();
   if (activity) {
     pipe.xadd(

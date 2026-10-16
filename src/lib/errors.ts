@@ -1,10 +1,4 @@
-export type ErrorCode =
-  | 'VALIDATION_ERROR'
-  | 'UNAUTHORIZED'
-  | 'FORBIDDEN'
-  | 'NOT_FOUND'
-  | 'CONFLICT'
-  | 'INTERNAL';
+export type ErrorCode = 'VALIDATION_ERROR' | 'UNAUTHORIZED' | 'FORBIDDEN' | 'NOT_FOUND' | 'CONFLICT' | 'INTERNAL';
 
 export class AppError extends Error {
   constructor(
