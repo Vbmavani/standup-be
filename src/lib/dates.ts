@@ -9,9 +9,7 @@ export function isValidDate(value: string): boolean {
   return !Number.isNaN(d.getTime()) && d.toISOString().slice(0, 10) === value;
 }
 
-export const dateSchema = z
-  .string()
-  .refine(isValidDate, { message: 'Must be a valid date in YYYY-MM-DD format' });
+export const dateSchema = z.string().refine(isValidDate, { message: 'Must be a valid date in YYYY-MM-DD format' });
 
 export const nowIso = (): string => new Date().toISOString();
 

@@ -11,7 +11,13 @@ import { TASK_STATUSES, type RouteOptions, type TaskHash } from '../types.js';
 
 const querySchema = z.object({ weekStart: dateSchema.optional() });
 
-type MemberStats = { userId: string; name: string; standupsSubmitted: number; tasksCreated: number; tasksCompleted: number };
+type MemberStats = {
+  userId: string;
+  name: string;
+  standupsSubmitted: number;
+  tasksCreated: number;
+  tasksCompleted: number;
+};
 
 const summaryRoutes: FastifyPluginAsync<RouteOptions> = async (app) => {
   const redis = app.redis;
@@ -85,7 +91,9 @@ const summaryRoutes: FastifyPluginAsync<RouteOptions> = async (app) => {
       blockers.push(...dayBlockers);
     });
 
-    const members = [...stats.values()].sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base' }));
+    const members = [...stats.values()].sort((a, b) =>
+      a.name.localeCompare(b.name, undefined, { sensitivity: 'base' }),
+    );
 
     return {
       weekStart,

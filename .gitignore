@@ -7,3 +7,10 @@ coverage
 !.env.example
 .DS_Store
 *.tsbuildinfo
+
+# Claude Code local files
+CLAUDE.local.md
+.claude/settings.local.json
+.claude/hooks.log
+.claude/hooks.jsonl
+.claude/transcripts/

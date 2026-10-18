@@ -30,8 +30,16 @@ describe('summary', () => {
     // An old task that falls outside the week.
     const oldId = 'old-task';
     await app.redis.hset(`task:${oldId}`, {
-      id: oldId, teamId: team.id, title: 'Old', description: '', status: 'done', assigneeId: '', dueDate: '',
-      createdBy: alice.user.id, createdAt: '2020-01-01T00:00:00.000Z', updatedAt: '2020-01-01T00:00:00.000Z',
+      id: oldId,
+      teamId: team.id,
+      title: 'Old',
+      description: '',
+      status: 'done',
+      assigneeId: '',
+      dueDate: '',
+      createdBy: alice.user.id,
+      createdAt: '2020-01-01T00:00:00.000Z',
+      updatedAt: '2020-01-01T00:00:00.000Z',
       completedAt: '2020-01-02T00:00:00.000Z',
     });
     await app.redis.rpush(`team:${team.id}:col:done`, oldId);

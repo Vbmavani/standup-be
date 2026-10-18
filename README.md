@@ -23,23 +23,23 @@ Then start the web app in `../standup-fe` (`pnpm dev`, port 5173).
 
 ## Scripts
 
-| Command | What it does |
-|---|---|
-| `pnpm dev` | Runs `src/server.ts` with tsx watch |
-| `pnpm build` | Compiles TypeScript to `dist/` |
-| `pnpm start` | Runs `dist/server.js` |
-| `pnpm test` | Runs the Vitest suite. It needs Redis on `localhost:6379` and uses **DB 15**, which is flushed |
-| `pnpm typecheck` | Runs `tsc --noEmit` |
-| `pnpm redis` | Runs `docker compose up -d redis` |
+| Command          | What it does                                                                                   |
+| ---------------- | ---------------------------------------------------------------------------------------------- |
+| `pnpm dev`       | Runs `src/server.ts` with tsx watch                                                            |
+| `pnpm build`     | Compiles TypeScript to `dist/`                                                                 |
+| `pnpm start`     | Runs `dist/server.js`                                                                          |
+| `pnpm test`      | Runs the Vitest suite. It needs Redis on `localhost:6379` and uses **DB 15**, which is flushed |
+| `pnpm typecheck` | Runs `tsc --noEmit`                                                                            |
+| `pnpm redis`     | Runs `docker compose up -d redis`                                                              |
 
 ## Environment
 
-| Variable | Default |
-|---|---|
-| `PORT` | `4000` |
-| `REDIS_URL` | `redis://localhost:6379` |
-| `WEB_ORIGIN` | `http://localhost:5173` (CORS origin, sent with credentials) |
-| `COOKIE_SECURE` | `false` (set it to `true` behind HTTPS) |
+| Variable        | Default                                                      |
+| --------------- | ------------------------------------------------------------ |
+| `PORT`          | `4000`                                                       |
+| `REDIS_URL`     | `redis://localhost:6379`                                     |
+| `WEB_ORIGIN`    | `http://localhost:5173` (CORS origin, sent with credentials) |
+| `COOKIE_SECURE` | `false` (set it to `true` behind HTTPS)                      |
 
 ## Layout
 

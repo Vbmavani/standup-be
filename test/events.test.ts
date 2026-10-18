@@ -23,7 +23,12 @@ describe('live events (SSE)', () => {
     const received: string[] = [];
     let headers: http.IncomingHttpHeaders = {};
     const req = http.get(
-      { host: '127.0.0.1', port, path: `/api/teams/${team.id}/events`, headers: { cookie, origin: 'http://localhost:5173' } },
+      {
+        host: '127.0.0.1',
+        port,
+        path: `/api/teams/${team.id}/events`,
+        headers: { cookie, origin: 'http://localhost:5173' },
+      },
       (res) => {
         headers = res.headers;
         res.setEncoding('utf8');

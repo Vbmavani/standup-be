@@ -93,7 +93,9 @@ export async function buildApp(opts: BuildAppOptions = {}): Promise<FastifyInsta
   });
 
   app.setNotFoundHandler((request, reply) => {
-    reply.status(404).send({ error: { code: 'NOT_FOUND', message: `Route ${request.method} ${request.url} not found` } });
+    reply
+      .status(404)
+      .send({ error: { code: 'NOT_FOUND', message: `Route ${request.method} ${request.url} not found` } });
   });
 
   const routeOpts = { prefix: '/api', cookieSecure: config.cookieSecure, webOrigin: config.webOrigin };
